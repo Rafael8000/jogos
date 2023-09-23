@@ -48,7 +48,7 @@ public class PlataformaController {
 
     @RequestMapping("/Atualizar")
     public String update(Model model, @RequestParam("id") int id) {
-        Optional<Plataforma> livro = PlatRepo.findById(id);
+        Optional<Plataforma> Plataforma = PlatRepo.findById(id);
         model.addAttribute("Fornecedor", FornRepo.findAll());
 
         if(Plataforma.isPresent()) {
@@ -72,12 +72,12 @@ public class PlataformaController {
             PlatRepo.save(Plataforma.get());
         }
 
-        return "redirect:/livro/list";
+        return "redirect:/Plataformas/lista";
     }
 
     @RequestMapping("/delete")
     public String delete(Model model, @RequestParam("id") int id) {
-        Optional<Livro> livro = livroRepo.findById(id);
+        Optional<Plataforma> livro = PlatRepo.findById(id);
 
         if(livro.isPresent()) {
             model.addAttribute("livro", livro.get());
@@ -87,10 +87,10 @@ public class PlataformaController {
         return "redirect:/livro/list";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/deletar", method = RequestMethod.POST)
     public String delete(@RequestParam("id") int id) {
-        livroRepo.deleteById(id);
+        PlatRepo.deleteById(id);
 
-        return "redirect:/livro/list";
+        return "redirect:/Plataformas/lista";
     }
 }
